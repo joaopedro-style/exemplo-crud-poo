@@ -1,11 +1,13 @@
 <?php
 namespace ExemploCrud\Services;
 
+use ExemploCrud\Database\ConexaoBD;
+
 use Exception;
 use PDO;
 use Throwable;
 
-use ExemploCrud\ConexaoBD;
+
 
 
 final class FabricanteServico {
