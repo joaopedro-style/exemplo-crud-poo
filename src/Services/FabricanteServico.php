@@ -64,20 +64,34 @@ final class FabricanteServico
             // versão usando ternário simplificado usando 'elvis operator'
             return $consulta->fetch(PDO::FETCH_ASSOC) ?: null;
         } catch (Throwable $erro) {
-            throw new Exception ("Erro ao carregar fabricante: " . $erro->getMessage());
+            throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
         }
     }
 
-    public function atualizar(Fabricante $fabricante):void {
+    public function atualizar(Fabricante $fabricante): void
+    {
         $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
 
-    try {
-        $consulta = $this->conexao->prepare($sql);
-        $consulta->bindvalue(":nome", $fabricante->getNome(), PDO::PARAM_STR);
-        $consulta->bindvalue(":id", $fabricante->getId(), PDO::PARAM_INT);
-        $consulta->execute();
-    } catch (Throwable $erro) {
-        throw new Exception("Erro ao atualizar fabricante: ".$erro->getMessage());
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindvalue(":nome", $fabricante->getNome(), PDO::PARAM_STR);
+            $consulta->bindvalue(":id", $fabricante->getId(), PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Erro ao atualizar fabricante: " . $erro->getMessage());
+        }
     }
+
+    public function excluir(int $id): void
+    {
+        $sql = "DELETE FROM fabricantes WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Erro ao excluir fabricante: " . $erro->getMessage());
+        }
     }
 }
