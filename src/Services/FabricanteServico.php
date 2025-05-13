@@ -67,4 +67,17 @@ final class FabricanteServico
             throw new Exception ("Erro ao carregar fabricante: " . $erro->getMessage());
         }
     }
+
+    public function atualizar(Fabricante $fabricante):void {
+        $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+
+    try {
+        $consulta = $this->conexao->prepare($sql);
+        $consulta->bindvalue(":nome", $fabricante->getNome(), PDO::PARAM_STR);
+        $consulta->bindvalue(":id", $fabricante->getId(), PDO::PARAM_INT);
+        $consulta->execute();
+    } catch (Throwable $erro) {
+        throw new Exception("Erro ao atualizar fabricante: ".$erro->getMessage());
+    }
+    }
 }
