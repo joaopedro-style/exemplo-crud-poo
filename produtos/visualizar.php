@@ -1,7 +1,11 @@
 <?php // produtos/visualizar.php
-require_once "../src/funcoes-produtos.php";
-require_once "../src/funcoes-utilitarias.php";
-$listaDeProdutos = listarProdutos($conexao);
+
+use ExemploCrud\Helpers\Utils;
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../vendor/autoload.php";
+$produtoServico = new ProdutoServico();
+$listaDeProdutos = $fabricanteServico->listarTodos();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,9 +33,9 @@ $listaDeProdutos = listarProdutos($conexao);
                 <article class="bg-body-secondary p-2">
                     <h3><?=$produto["produto"]?></h3>
                     <h4>Fabricante: <?=$produto["fabricante"]?></h4>
-                    <p><b>Preço: </b> <?=formatarPreco($produto["preco"])?></p>
+                    <p><b>Preço: </b> <?=Utils::formatarPreco($produto["preco"])?></p>
                     <p><b>Quantidade: </b> <?=$produto["quantidade"]?></p>
-                    <p><b>Total:</b><?=formatarPreco($produto["preco"] * $produto["quantidade"])?></p>
+                    <p><b>Total:</b><?=Utils::formatarPreco($produto["preco"] * $produto["quantidade"])?></p>
 
                     <p>
                         <a class="btn btn-warning btn-sm" href="atualizar.php?id=<?=$produto['id']?>">Editar</a>

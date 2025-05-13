@@ -1,25 +1,25 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-require_once "../src/funcoes-produtos.php";
-$listaDeFabricantes = listarFabricantes($conexao);
+
+use ExemploCrud\Models\Produto;
+use ExemploCrud\Services\FabricanteServico;
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../vendor/autoload.php";
+
+$fabricanteServico = new FabricanteServico();
+$produtoServico = new ProdutoServico();
+
+$listaDeFabricantes = $fabricanteServico->listarTodos();
 
 if (isset($_POST["inserir"])) {
-    // Capturar/sanitizar os dados
     $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
     $preco = filter_input(INPUT_POST, "preco", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-
     $quantidade = filter_input(INPUT_POST, "quantidade", FILTER_SANITIZE_NUMBER_INT);
-
-    // Obs.: lembre-se que capturamos na verdade o value (que na prática é o id do fabricante)
-    $idfabricante = filter_input(INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT);
-
+    $idFabricante = filter_input(INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT);
     $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     
-    // chamada a função responsável por inserir o produto e passar os parâmetros
-    inserirProduto($conexao, $nome, $preco, $quantidade, $idfabricante, $descricao);
-
-    // por fim, redirecionar para visualização dos produtos
+    $produto = new Produto($nome, $preco, $quantidade, $idFabricante, $descricao);    
+    $produtoServico->inserir($produto);
     header("location:visualizar.php");
     exit;
 }
