@@ -56,12 +56,13 @@ final class FabricanteServico
             $consulta->execute();
 
             /* Guardamos o resultado da operação fetch em uma variável */
-            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            // $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
 
             /* Se o resultado for verdadeiro, retornamos ele. senão, retornamos null */
-            return $resultado ? $resultado : null;
+            // return $resultado ? $resultado : null;
 
-            // return $consulta-> fetch(PDO::FECTCH_ASSOC);
+            // versão usando ternário simplificado usando 'elvis operator'
+            return $consulta->fetch(PDO::FETCH_ASSOC) ?: null;
         } catch (Throwable $erro) {
             throw new Exception ("Erro ao carregar fabricante: " . $erro->getMessage());
         }
