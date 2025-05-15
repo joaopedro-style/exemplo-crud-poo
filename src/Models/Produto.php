@@ -6,12 +6,13 @@ use InvalidArgumentException;
 
 final class Produto
 {
-    private ?int $id;
+    
     private string $nome;
     private ?string $descricao;
     private float $preco;
     private int $quantidade;
     private int $fabricanteId;
+    private ?int $id;
 
     public function __construct(
         string $nome,

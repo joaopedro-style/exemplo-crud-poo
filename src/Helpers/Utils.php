@@ -16,7 +16,7 @@ final class Utils
         echo "</pre>";
     }
 
-    function formatarPreco(float $valor): string
+    public static function formatarPreco(float $valor): string
     {
         return "R$" . number_format($valor, 2, ",", ".");
     }

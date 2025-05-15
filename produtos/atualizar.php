@@ -1,16 +1,17 @@
 <?php
-require_once "../src/funcoes-produtos.php";
 
-require_once "../src/funcoes-fabricantes.php";
-$listaDeFabricantes = listarFabricantes($conexao);
+use ExemploCrud\Models\Produto;
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../vendor/autoload.php";
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-$produto = listarUmProduto($conexao, $id);
 
-// verificando se o formulário é acionado
+$produtoServico = new ProdutoServico();
+$produtoDados = $produtoServico->buscarPorId($id);
+
 if ( isset($_POST['atualizar']) ){
 
-    // Capturando os dados digitado do novo produto
     $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     $preco = filter_input(INPUT_POST, "preco",
@@ -25,7 +26,8 @@ if ( isset($_POST['atualizar']) ){
     $descricao = filter_input(INPUT_POST, "descricao",
     FILTER_SANITIZE_SPECIAL_CHARS);
 
-    atualizarProduto($conexao, $id, $nome, $preco, $quantidade, $fabricanteId, $descricao);
+    $produto = new Produto($nome, $preco, $quantidade, $fabricanteId, $descricao);
+    $produtoServico->atualizar($produto);
 
     header("location:visualizar.php");
     exit;

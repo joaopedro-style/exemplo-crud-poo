@@ -5,7 +5,7 @@ use ExemploCrud\Services\ProdutoServico;
 
 require_once "../vendor/autoload.php";
 $produtoServico = new ProdutoServico();
-$listaDeProdutos = $fabricanteServico->listarTodos();
+$listaDeProdutos = $produtoServico->listarTodos();
 $quantidade = count($listaDeProdutos);
 ?>
 <!DOCTYPE html>
