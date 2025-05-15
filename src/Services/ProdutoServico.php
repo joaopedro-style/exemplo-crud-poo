@@ -73,12 +73,12 @@ final class ProdutoServico
 
         try {
             $consulta = $this->conexao->prepare($sql);
-            $consulta->bindvalue(":id", $produto->getId(), PDO::PARAM_INT);
-            $consulta->bindvalue(":nome", $produto->getNome(), PDO::PARAM_STR);
-            $consulta->bindvalue(":preco", $produto->getPreco(), PDO::PARAM_STR);
-            $consulta->bindvalue(":quantidade", $produto->getQuantidade(), PDO::PARAM_INT);
-            $consulta->bindvalue(":fabricante", $produto->getFabricanteId(), PDO::PARAM_INT);
-            $consulta->bindvalue(":descricao", $produto->getDescricao(), PDO::PARAM_STR);
+            $consulta->bindValue(":id", $produto->getId(), PDO::PARAM_INT);
+            $consulta->bindValue(":nome", $produto->getNome(), PDO::PARAM_STR);
+            $consulta->bindValue(":preco", $produto->getPreco(), PDO::PARAM_STR);
+            $consulta->bindValue(":quantidade", $produto->getQuantidade(), PDO::PARAM_INT);
+            $consulta->bindValue(":fabricante", $produto->getFabricanteId(), PDO::PARAM_INT);
+            $consulta->bindValue(":descricao", $produto->getDescricao(), PDO::PARAM_STR);
             $consulta->execute();
         } catch (Throwable $erro) {
             throw new Exception("Erro ao atualizar produtos: " . $erro->getMessage());
