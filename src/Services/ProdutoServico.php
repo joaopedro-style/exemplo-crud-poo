@@ -1,4 +1,5 @@
 <?php
+
 namespace ExemploCrud\Services;
 
 use Exception;
@@ -67,15 +68,20 @@ final class ProdutoServico
 
     public function atualizar(Produto $produto): void
     {
-        $sql = "UPDATE produtos SET nome = :nome WHERE id = :id";
+        $sql = "UPDATE produtos SET nome = :nome, preco = :preco, quantidade = :quantidade, fabricante_id = :fabricante, descricao = :descricao
+    WHERE id = :id";
 
         try {
             $consulta = $this->conexao->prepare($sql);
-            $consulta->bindvalue(":nome", $produto->getNome(), PDO::PARAM_STR);
             $consulta->bindvalue(":id", $produto->getId(), PDO::PARAM_INT);
+            $consulta->bindvalue(":nome", $produto->getNome(), PDO::PARAM_STR);
+            $consulta->bindvalue(":preco", $produto->getPreco(), PDO::PARAM_STR);
+            $consulta->bindvalue(":quantidade", $produto->getQuantidade(), PDO::PARAM_INT);
+            $consulta->bindvalue(":fabricante", $produto->getFabricanteId(), PDO::PARAM_INT);
+            $consulta->bindvalue(":descricao", $produto->getDescricao(), PDO::PARAM_STR);
             $consulta->execute();
         } catch (Throwable $erro) {
-            throw new Exception("Erro ao atualizar produto: " . $erro->getMessage());
+            throw new Exception("Erro ao atualizar produtos: " . $erro->getMessage());
         }
     }
 
