@@ -1,5 +1,12 @@
-[2025-05-16 10:46:34]
-Arquivo: C:\xampp\htdocs\exemplo-crud-poo\fabricantes\visualizar.php
-Linha: 12
-Mensagem: Call to undefined method ExemploCrud\Services\FabricanteServico::listarTodo()
+
+
+[2025-05-16 11:01:00]
+Arquivo: C:\xampp\htdocs\exemplo-crud-poo\src\Services\FabricanteServico.php
+Linha: 30
+Mensagem: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'vendas.fabricante' doesn't exist
+
+[2025-05-16 11:01:00]
+Arquivo: C:\xampp\htdocs\exemplo-crud-poo\src\Services\FabricanteServico.php
+Linha: 34
+Mensagem: Erro ao carregar fabricantes
 
