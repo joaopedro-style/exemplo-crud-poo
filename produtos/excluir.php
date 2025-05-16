@@ -7,6 +7,8 @@ $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 $produtoServico = new ProdutoServico();
 
+$produto = $produtoServico->buscarPorId($id);
+
 if (isset($_GET['confirmar-exclusao'])) {
     $produtoServico->excluir($id);
     header("location:visualizar.php");
@@ -29,7 +31,7 @@ if (isset($_GET['confirmar-exclusao'])) {
         <hr>
 
         <div class="alert alert-danger w-50">
-            <p> Deseja realmente excluir o produto?</p>
+            <p> Deseja realmente excluir o produto <?=$produto['nome']?>?</p>
 
             <a href="visualizar.php" class="btn btn-secondary">Não</a>
             <a href="?id=<?=$id?>&confirmar-exclusao" class="btn btn-danger">Sim</a>
