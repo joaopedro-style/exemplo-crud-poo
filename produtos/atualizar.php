@@ -15,7 +15,7 @@ $produtoDados = $produtoServico->buscarPorId($id);
 
 if ( isset($_POST['atualizar']) ){
 
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
 
     $preco = filter_input(INPUT_POST, "preco",
     FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
@@ -28,8 +28,6 @@ if ( isset($_POST['atualizar']) ){
 
     $descricao = filter_input(INPUT_POST, "descricao",
     FILTER_SANITIZE_SPECIAL_CHARS);
-
-    $id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
 
     $produto = new Produto($nome, $preco, $quantidade, $fabricanteId, $descricao, $id);
     $produtoServico->atualizar($produto);

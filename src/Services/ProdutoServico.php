@@ -37,13 +37,13 @@ final class ProdutoServico
 
     public function inserir(Produto $produto): void
     {
-        $sql = "INSERT INTO produtos(nome, preco, quantidade, fabricante_id, descricao) VALUES(:nome, :preco, :quantidade, :fabricante, :descricao)";
+        $sql = "INSERT INTO produtos(nome, preco, quantidade, fabricante_id, descricao) VALUES(:nome, :preco, :quantidade, :fabricante_id, :descricao)";
         try {
             $consulta = $this->conexao->prepare($sql);
             $consulta->bindValue(":nome", $produto->getNome(), PDO::PARAM_STR);
             $consulta->bindValue(":preco", $produto->getPreco(), PDO::PARAM_STR);
             $consulta->bindValue(":quantidade", $produto->getQuantidade(), PDO::PARAM_INT);
-            $consulta->bindValue(":fabricante", $produto->getFabricanteId(), PDO::PARAM_INT);
+            $consulta->bindValue(":fabricante_id", $produto->getFabricanteId(), PDO::PARAM_INT);
             $consulta->bindValue(":descricao", $produto->getDescricao(), PDO::PARAM_STR);
             $consulta->execute();
         } catch (Throwable $erro) {
@@ -68,7 +68,7 @@ final class ProdutoServico
 
     public function atualizar(Produto $produto): void
     {
-        $sql = "UPDATE produtos SET nome = :nome, preco = :preco, quantidade = :quantidade, fabricante_id = :fabricante, descricao = :descricao
+        $sql = "UPDATE produtos SET nome = :nome, preco = :preco, quantidade = :quantidade, fabricante_id = :fabricante_id, descricao = :descricao
     WHERE id = :id";
 
         try {
@@ -77,7 +77,7 @@ final class ProdutoServico
             $consulta->bindValue(":nome", $produto->getNome(), PDO::PARAM_STR);
             $consulta->bindValue(":preco", $produto->getPreco(), PDO::PARAM_STR);
             $consulta->bindValue(":quantidade", $produto->getQuantidade(), PDO::PARAM_INT);
-            $consulta->bindValue(":fabricante", $produto->getFabricanteId(), PDO::PARAM_INT);
+            $consulta->bindValue(":fabricante_id", $produto->getFabricanteId(), PDO::PARAM_INT);
             $consulta->bindValue(":descricao", $produto->getDescricao(), PDO::PARAM_STR);
             $consulta->execute();
         } catch (Throwable $erro) {
